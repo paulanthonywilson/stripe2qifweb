@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title><%= @title %></title>
+  <link rel="shortcut icon" href="/static/favicon.ico" />
+</head>
+<body>
+  <h1>Hey</h1>
+  <p>
+  <%= conn.req_headers |>   inspect %>
+  </p>
+</body>
+</html>
