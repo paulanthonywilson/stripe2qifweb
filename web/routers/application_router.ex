@@ -25,6 +25,27 @@ defmodule ApplicationRouter do
   end
 
   get "/qif" do
-    conn
+    key = conn.params[:stripe_key]
+    tito = conn.params[:tito] == "true"
+    date = Stripe2qif.DateConvert.parse_date(conn.params[:date])
+    download_qif conn, {key, tito, date}
+  end
+
+  def download_qif conn, {_, tito, :error} do
+    conn = conn.assign(:error, "I'm afraid \"#{conn.params[:date]}\" is not a date I can work with. Sorry.")
+    render conn, "error.html"
+  end
+
+  def download_qif conn, {key, tito, date} do
+    Stripe2qif.run(key, tito, date) |> download(conn)
+  end
+
+
+  defp download(content, conn) do
+    conn = conn.put_resp_header("Content-Disposition", "attachment; filename=stripe.qif")
+    .put_resp_header("Content-Type", "application/x-qw")
+
+    conn.resp_body content
+
   end
 end

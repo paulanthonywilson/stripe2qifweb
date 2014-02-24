@@ -12,12 +12,14 @@ defmodule Stripe2qifweb.Mixfile do
 
   # Configuration for the OTP application
   def application do
-    [ applications: [:cowboy, :dynamo],
+    [ applications: [:cowboy, :dynamo, :httpotion],
       mod: { Stripe2qifweb, [] } ]
   end
 
   defp deps do
     [ { :cowboy, github: "extend/cowboy" },
-      { :dynamo, "~> 0.1.0-dev", github: "elixir-lang/dynamo" } ]
+      { :dynamo, "~> 0.1.0-dev", github: "elixir-lang/dynamo" },
+      { :stripe2qif, github: "paulanthonywilson/stripe2qif"},
+      ]
   end
 end
