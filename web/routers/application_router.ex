@@ -1,6 +1,7 @@
 defmodule EnsureSSL do
   def service(conn, fun) do
     conn = conn.fetch([:cookies, :params, :headers])
+    conn = conn.assign(:layout, "main")
     if conn.req_headers["x-forwarded-proto"] == "http" do
       ApplicationRouter.no_ssl(conn, conn.req_headers["host"])
     else
@@ -18,12 +19,12 @@ defmodule ApplicationRouter do
   end
 
 
-  # It is common to break your Dynamo into many
-  # routers, forwarding the requests between them:
-  # forward "/posts", to: PostsRouter
-
   get "/" do
-    conn = conn.assign(:title, "Welcome to Dynamo!")
+    conn = conn.assign(:title, "Stripe QIF downloader")
     render conn, "index.html"
+  end
+
+  get "/qif" do
+    conn
   end
 end

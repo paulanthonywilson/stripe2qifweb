@@ -1,13 +1,13 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  <title><%= @title %></title>
-  <link rel="shortcut icon" href="/static/favicon.ico" />
-</head>
-<body>
-  <h1>Hey</h1>
-  <p>
-  <%= conn.req_headers |>   inspect %>
-  </p>
-</body>
-</html>
+<h1>Download QIF from Stripe</h1>
+
+<p>You need your private Stripe API key. Enter it here, and download a QIF. We do not store your key.</p>
+
+<form action="/qif" method="get" role="form">
+  <div class="form-group">
+    <label for="stripe-key">Stripe key</label>
+    <input type="text" id="stripe-key" name="stripe-key" value="<%= h conn.params[:stripe_key] %>"/>
+  </div>
+  <div class="form-group">
+    <input type="submit" value="Download QIF"/>
+  </div>
+</form>
