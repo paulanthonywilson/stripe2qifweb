@@ -5,7 +5,7 @@
 
 <form action="/qif" method="get" role="form">
   <div class="form-group">
-    <label for="date">From date (yyyy-mm-dd)</label>
+    <label for="date">To date (yyyy-mm-dd)</label>
     <input type="date" id="date" name="date" value="<%= h conn.params[:date] %>"/>
   </div>
   <div class="form-group">

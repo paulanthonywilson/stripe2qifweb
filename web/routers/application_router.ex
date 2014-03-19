@@ -27,7 +27,7 @@ defmodule ApplicationRouter do
   get "/qif" do
     key = conn.params[:stripe_key]
     tito = conn.params[:tito] == "true"
-    date = Stripe2qif.DateConvert.parse_date(conn.params[:date])
+    date = parse_date(conn.params[:date])
     download_qif conn, {key, tito, date}
   end
 
@@ -46,6 +46,13 @@ defmodule ApplicationRouter do
     .put_resp_header("Content-Type", "application/x-qw")
 
     conn.resp_body content
+  end
 
+  defp parse_date("") do
+    nil
+  end
+
+  defp parse_date(date) do
+    Stripe2qif.DateConvert.parse_date(date)
   end
 end
