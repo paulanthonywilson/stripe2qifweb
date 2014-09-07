@@ -4,22 +4,29 @@ defmodule Stripe2qifweb.Mixfile do
   def project do
     [ app: :stripe2qifweb,
       version: "0.0.1",
-      build_per_environment: true,
-      dynamos: [Stripe2qifweb.Dynamo],
-      compilers: [:elixir, :dynamo, :app],
+      elixir: "~> 1.0.0-rc1",
+      elixirc_paths: ["lib", "web"],
       deps: deps ]
   end
 
   # Configuration for the OTP application
   def application do
-    [ applications: [:cowboy, :dynamo, :httpotion],
-      mod: { Stripe2qifweb, [] } ]
+    [
+      mod: { Stripe2qifweb, [] },
+      applications: [:phoenix, :cowboy, :logger, :httpotion]
+    ]
   end
 
+  # Returns the list of dependencies in the format:
+  # { :foobar, git: "https://github.com/elixir-lang/foobar.git", tag: "0.1" }
+  #
+  # To specify particular versions, regardless of the tag, do:
+  # { :barbat, "~> 0.1", github: "elixir-lang/barbat" }
   defp deps do
-    [ { :cowboy, github: "extend/cowboy" },
-      { :dynamo, "~> 0.1.0-dev", github: "elixir-lang/dynamo" },
+    [
+      {:phoenix, "0.4.0"},
+      {:cowboy, "~> 1.0.0"},
       { :stripe2qif, github: "paulanthonywilson/stripe2qif"},
-      ]
+    ]
   end
 end

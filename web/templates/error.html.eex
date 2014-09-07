@@ -1,5 +1,0 @@
-<h1>Ooops</h1>
-
-<p><%= @error %></p>
-
-<p> <a href="/">Go back</a> </p>

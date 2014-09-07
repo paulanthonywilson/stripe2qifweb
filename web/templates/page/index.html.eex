@@ -3,20 +3,25 @@
 <p>You need your private Stripe API key. Enter it here, and download a QIF. We do not store your key.</p>
 <p>Only 100 entries supported.</p>
 
+
+
+<p class="error"><%= @error %></p>
+
 <form action="/qif" method="get" role="form">
   <div class="form-group">
     <label for="date">To date (yyyy-mm-dd)</label>
-    <input type="date" id="date" name="date" value="<%= h conn.params[:date] %>"/>
+    <input type="date" id="date" name="date" value="<%= @date %>"/>
   </div>
   <div class="form-group">
     <label for="tito">Tito?</label>
-    <input type="checkbox" id="tito" name="tito" value="true"/>
+    <input type="checkbox" id="tito" name="tito" value="true" <%=@tito_check %>/>
   </div>
   <div class="form-group">
     <label for="stripe_key">Stripe key</label>
-    <input type="text" id="stripe_key" name="stripe_key" value="<%= h conn.params[:stripe_key] %>"/>
+    <input type="text" id="stripe_key" name="stripe_key" value="<%= @stripe_key %>"/>
   </div>
   <div class="form-group">
     <input type="submit" value="Download QIF"/>
   </div>
 </form>
+

@@ -1,11 +1,17 @@
 defmodule Stripe2qifweb do
-  use Application.Behaviour
+  use Application
 
-  @doc """
-  The application callback used to start this
-  application and its Dynamos.
-  """
+  # See http://elixir-lang.org/docs/stable/elixir/Application.html
+  # for more information on OTP Applications
   def start(_type, _args) do
-    Stripe2qifweb.Dynamo.start_link([max_restarts: 5, max_seconds: 5])
+    import Supervisor.Spec, warn: false
+
+    children = [
+      # Define workers and child supervisors to be supervised
+      # worker(TestApp.Worker, [arg1, arg2, arg3])
+    ]
+
+    opts = [strategy: :one_for_one, name: Stripe2qifweb.Supervisor]
+    Supervisor.start_link(children, opts)
   end
 end
