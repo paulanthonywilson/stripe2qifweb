@@ -13,7 +13,7 @@ On Heroku, at https://stripe2qif.herokuapp.com.
 
 
 
-This is a project built with Elixir that uses Dynamo to serve web requests.
+This is a project built with Elixir that uses Phoenix to serve web requests.
 
 Resources:
 
